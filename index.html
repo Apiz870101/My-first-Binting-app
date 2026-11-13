@@ -1,9 +1,30 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Pengembaraan Bintang</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bintang</title>
+<meta name="application-name" content="Bintang">
+<meta name="description" content="Game pembelajaran untuk kanak-kanak: baca, isi tempat kosong, mengira dan melukis sambil mengumpul bintang.">
+<meta name="theme-color" content="#8450f0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bintang">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Asas halaman (sama seperti persekitaran asal aplikasi) */
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}
+img{max-width:100%}
+[hidden]:not([hidden=until-found i]){display:none!important}
+</style>
 <style>
 /* Layout: one-screen app shell. Slim HUD on top, one full-height screen below.
    The winding road map is home base; every task is a chunky white card on a pastel backdrop of the place's colour.
@@ -219,8 +240,10 @@ h1,h2,h3{text-wrap:balance}
 @keyframes fall{to{top:104%;transform:rotate(300deg)}}
 @keyframes sway{50%{transform:rotate(4deg)}0%,100%{transform:rotate(-4deg)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+html,body{overscroll-behavior:none}
 </style>
-
+</head>
+<body>
 <div id="app">
   <header id="hud" hidden>
     <button class="ib" id="homeBtn" type="button" aria-label="Ke menu utama"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 3l9 8.5V21h-6.5v-6h-5v6H3z" fill="currentColor"/></svg></button>
@@ -858,5 +881,13 @@ $('#sndBtn').onclick=function(){S.sound=!S.sound;save();hud(true);if(S.sound)sfx
 title();
 })();
 </script>
-
-</body></html>
+<script>
+/* Daftar service worker supaya aplikasi boleh dipasang dan berjalan tanpa internet */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(function(){});
+  });
+}
+</script>
+</body>
+</html>
